@@ -1,7 +1,7 @@
 from telegram import Update
 from telegram.ext import ApplicationBuilder, MessageHandler, ContextTypes, filters
 
-BOT_TOKEN = "YOUR_TELEGRAM_BOT_TOKEN"
+BOT_TOKEN = "8665754264:AAEfCv62tJEJ6idbIollWY91jxXzeyTcS6c"
 
 
 def ai_reply(text):
