@@ -1,40 +1,13 @@
 from telegram import Update
-from telegram.ext import ApplicationBuilder, MessageHandler, ContextTypes, filters
+from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 
-BOT_TOKEN = "8665754264:AAEfCv62tJEJ6idbIollWY91jxXzeyTcS6c"
+TOKEN = "8665754264:AAEfCv62tJEJ6idbIollWY91jxXzeyTcS6c"
 
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text("Bot is working 🚀")
 
-def ai_reply(text):
-    text = text.lower()
+app = ApplicationBuilder().token(TOKEN).build()
 
-    if "hi" in text or "hello" in text:
-        return "Hello 👋 I am your 24/7 bot!"
-    elif "how are you" in text:
-        return "I am good 😊"
-    else:
-        return "You said: " + text
+app.add_handler(CommandHandler("start", start))
 
-
-async def handle(update: Update, context: ContextTypes.DEFAULT_TYPE):
-
-    if not update.message:
-        return
-
-    msg = update.message.text
-    reply = ai_reply(msg)
-
-    await update.message.reply_text(reply)
-
-
-def main():
-    app = ApplicationBuilder().token(BOT_TOKEN).build()
-
-    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle))
-
-    print("Bot running...")
-
-    app.run_polling()
-
-
-if __name__ == "__main__":
-    main()
+app.run_polling()
